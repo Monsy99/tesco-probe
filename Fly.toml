@@ -12,7 +12,7 @@ primary_region = "ams"       # closest Fly region — see: fly platform regions
   PORT         = "3000"
   NODE_ENV     = "production"
   # Seed URLs at deploy time (optional — you can also add via dashboard/API)
-  # PROBE_URLS = "https://example.com/health,https://api.other.com"
+  PROBE_URLS = "https://https://www.ourtesco.com/experience/_mfs_versions,https://www.ourtesco.com/dex-pay-adjustments/_status,https://www.ourtesco.com/bonus-calculator/_status"
  
 [http_service]
   internal_port       = 3000
