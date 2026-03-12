@@ -1,0 +1,31 @@
+# fly.toml — multi-monitor
+# Deploy with: fly deploy
+# First time:  fly launch --no-deploy  (then fly deploy)
+ 
+app = "multi-monitor"        # change to your unique app name
+primary_region = "ams"       # closest Fly region — see: fly platform regions
+ 
+[build]
+  dockerfile = "Dockerfile"
+ 
+[env]
+  PORT         = "3000"
+  NODE_ENV     = "production"
+  # Seed URLs at deploy time (optional — you can also add via dashboard/API)
+  # PROBE_URLS = "https://example.com/health,https://api.other.com"
+ 
+[http_service]
+  internal_port       = 3000
+  force_https         = true   # Fly terminates TLS, app speaks plain HTTP inside
+  auto_stop_machines  = false  # IMPORTANT: keep process alive for background probing
+  auto_start_machines = true
+  min_machines_running = 1
+ 
+  [http_service.concurrency]
+    type       = "requests"
+    hard_limit = 50
+    soft_limit = 25
+ 
+[[vm]]
+  size   = "shared-cpu-1x"   # free tier machine size
+  memory = "256mb"            # plenty for this workload
